@@ -1,5 +1,6 @@
 package com.emeric.androiderestaurant
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -60,7 +61,8 @@ class HomeActivity : ComponentActivity(), MenuInterface {
     }
 
     override fun dishPressed(dishType: DishType) {
-        Toast.makeText(this, "Voici mon toast", Toast.LENGTH_LONG).show()
+        val intent = Intent(this, MenuActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onPause() {
