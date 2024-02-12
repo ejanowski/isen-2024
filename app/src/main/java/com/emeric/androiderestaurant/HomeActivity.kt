@@ -56,10 +56,26 @@ class HomeActivity : ComponentActivity(), MenuInterface {
                 }
             }
         }
+        Log.d("lifeCycle", "Home Activity - OnCreate")
     }
 
     override fun dishPressed(dishType: DishType) {
         Toast.makeText(this, "Voici mon toast", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onPause() {
+        Log.d("lifeCycle", "Home Activity - OnPause")
+        super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("lifeCycle", "Home Activity - OnResume")
+    }
+
+    override fun onDestroy() {
+        Log.d("lifeCycle", "Home Activity - onDestroy")
+        super.onDestroy()
     }
 }
 
