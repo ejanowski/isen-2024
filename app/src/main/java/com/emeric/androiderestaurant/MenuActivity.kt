@@ -1,5 +1,6 @@
 package com.emeric.androiderestaurant
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -90,7 +92,7 @@ fun MenuView(type: DishType) {
     Column(Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally) {
         Text(type.title())
-        LazyColumn {
+        LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             category.value?.let {
                 items(it.items) {
                     dishRow(it)
@@ -102,12 +104,15 @@ fun MenuView(type: DishType) {
 }
 
 @Composable fun dishRow(dish: Dish) {
+    val context = LocalContext.current
     Card(border =  BorderStroke(1.dp, Color.Black),
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
             .clickable {
-                Log.d("click", "click")
+                val intent = Intent(context, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.DISH_EXTRA_KEY, dish)
+                context.startActivity(intent)
             }
     ) {
         Row(Modifier.padding(8.dp)) {
