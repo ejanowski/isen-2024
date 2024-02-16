@@ -25,7 +25,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.currentCompositionLocalContext
@@ -84,6 +86,7 @@ class MenuActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuView(type: DishType) {
     val category = remember {
@@ -91,7 +94,9 @@ fun MenuView(type: DishType) {
     }
     Column(Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(type.title())
+        TopAppBar({
+            Text(type.title())
+        })
         LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             category.value?.let {
                 items(it.items) {
